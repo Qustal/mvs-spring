@@ -1,7 +1,16 @@
 package web.Model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "mvc_Cars")
 public class Car {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column
     private String name;
     private int speed;
     private String color;
