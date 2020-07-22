@@ -12,7 +12,9 @@ public class Car {
 
     @Column
     private String name;
+    @Column
     private int speed;
+    @Column
     private String color;
 
     public String getName() {
