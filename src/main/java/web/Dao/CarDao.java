@@ -1,5 +1,6 @@
 package web.Dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public class CarDao implements Dao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private Session getSession(){
+    private Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
@@ -26,13 +27,26 @@ public class CarDao implements Dao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Car> listCars() {
-        TypedQuery<Car> query = getSession().createQuery("from mvc_Cars");
-        return query.getResultList();
+        Criteria criteria = getSession().createCriteria(Car.class);
+        return (List<Car>) criteria.list();
     }
 
     @Override
     public void saveOrUpdate(Car car) {
         getSession().saveOrUpdate(car);
+    }
+
+    @Override
+    public Car findCarById(int id) {
+        Car car = getSession().get(Car.class, id);
+        return car;
+    }
+
+    @Override
+    public void deleteCar(int id) {
+        Car car = getSession().get(Car.class, id);
+        getSession().delete(car);
     }
 }

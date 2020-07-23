@@ -26,6 +26,11 @@ public class CarService implements Service {
     }
 
     @Override
+    public List<Car> listCars() {
+        return carDao.listCars();
+    }
+
+
     public List<Car> ListCars() {
         return carDao.listCars();
     }
@@ -33,5 +38,15 @@ public class CarService implements Service {
     @Override
     public void saveOrUpdate(Car car) {
         carDao.saveOrUpdate(car);
+    }
+
+    @Override
+    public Car findCarById(int id) {
+        return carDao.findCarById(id);
+    }
+
+    @Override
+    public void deleteCar(int id) {
+        carDao.deleteCar(id);
     }
 }

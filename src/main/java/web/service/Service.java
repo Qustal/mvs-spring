@@ -8,9 +8,12 @@ public interface Service {
 
     void addCar(Car car);
 
-    List<Car> ListCars();
+    List<Car> listCars();
 
-    public void saveOrUpdate(Car car);
+    void saveOrUpdate(Car car);
 
+    public Car findCarById (int id);
+
+    public void deleteCar(int id);
 
 }

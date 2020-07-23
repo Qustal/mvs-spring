@@ -28,15 +28,18 @@ public class HibernateConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
+        factoryBean.setPackagesToScan("java");
+        factoryBean.setHibernateProperties(hibernateProperties());
+                return factoryBean;
+    }
 
-        Properties props = new Properties();
-        props.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
-        props.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
-        props.put("hibernate.dialect",environment.getProperty("hibernate.dialect"));
+    private Properties hibernateProperties(){
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect",environment.getProperty("hibernate.dialect"));
+        properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+        return properties;
 
-        factoryBean.setHibernateProperties(props);
-        factoryBean.setAnnotatedClasses(Car.class);
-        return factoryBean;
     }
 
     @Bean
